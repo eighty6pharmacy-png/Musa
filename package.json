@@ -1,0 +1,21 @@
+{
+  "name": "musa",
+  "version": "1.0.0",
+  "description": "for testing purposes only",
+  "main": "balde.js",
+  "scripts": {
+    "test": "No command"
+  },
+  "repository": {
+    "type": "git",
+    "url": "\"http://sample.docs\""
+  },
+  "keywords": [
+    "123"
+  ],
+  "author": "Jan Ranier",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
