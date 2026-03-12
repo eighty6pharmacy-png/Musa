@@ -1,44 +1,20 @@
-const express = require("express");
-const path = require("path");
-const app = express();
+const http = require("http");
 
-// Middleware
-app.use((req, res, next) => {
-    next();
+const server = http.createServer((req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end("Welcome to the Node.js Tutorial!\n");
+    res.end("Visited: HOME PAGE");
+    res.end("Visited: ABOUT OS");
+    res.end("Visited: PRO-FILE PAGE");
+    res.end("File Content:");
 });
 
-// allow form data
-app.use(express.urlencoded({ extended: true }));
+server.listen(3000, () => {
+    console.log("Server running at http://localhost:3000/");
+    console.log("Visited: HOME PAGE");
+    console.log("Visited: ABOUT OS");
+    console.log("Visited: PRO-FILE PAGE");
+    console.log("File Content:");
 
-// Home Page
-app.get("/", (req, res) => {
-    console.log("User visited a page");
-    res.send("Welcome to my first server");
-});
-
-// Profile Page
-app.get("/profile", (req, res) => {
-    console.log("User visited a page");
-    res.send("My name is Jan Ranier Musa");
-});
-
-// Course Page
-app.get("/course", (req, res) => {
-    console.log("User visited a page");
-    res.send("BSIT");
-});
-
-// Greet
-app.get("/greet", (req, res) => {
-    if (req.query.msg) {
-        res.send(`${req.query.msg}<br>Welcome`);
-    } else {
-        res.sendFile(path.join(__dirname, "test.html"));
-    }
-});
-
-// Start server
-app.listen(3000, () => {
-    console.log(
-        "Server is running on http://localhost:3000");
 });
