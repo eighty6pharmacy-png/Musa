@@ -1,39 +1,44 @@
-const express = require ('express');
+const express = require("express");
+const path = require("path");
 const app = express();
 
-const hostname = "127.0.01";
-const port = 3000;
-
-// app.get('/',(req, res) => {
-//     res.send("Welcome to express");
-
-// });
-// app.get('/', (req, res) => {
-//     res.send('GET request to the homepage');
-// }); 
-
-// app.post('/', (req, res) => {
-//     res.send('Post Request');
-// }); 
-
-app.get('/about', (req, res) => {
-    res.send('about page');
-}); 
-
-app.get('/search', (req, res) => {
-    res.send(`User: ${req.query.userId}, 
-             Book ID: ${req.query.bookId || 'none'}`);
-}); 
-
-app.get('/users/:userId/books/:bookId', (req, res) => {
-    res.send(`User ID: ${req.params.userId}, 
-             Book ID: ${req.params.bookId}`);
-}); 
-
-app.use((req, res) => {
-    res.status(404).send('404 page not found');
-});
-app.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}`);
+// Middleware
+app.use((req, res, next) => {
+    next();
 });
 
+// allow form data
+app.use(express.urlencoded({ extended: true }));
+
+// Home Page
+app.get("/", (req, res) => {
+    console.log("User visited a page");
+    res.send("Welcome to my first server");
+});
+
+// Profile Page
+app.get("/profile", (req, res) => {
+    console.log("User visited a page");
+    res.send("My name is Jan Ranier Musa");
+});
+
+// Course Page
+app.get("/course", (req, res) => {
+    console.log("User visited a page");
+    res.send("BSIT");
+});
+
+// Greet
+app.get("/greet", (req, res) => {
+    if (req.query.msg) {
+        res.send(`${req.query.msg}<br>Welcome`);
+    } else {
+        res.sendFile(path.join(__dirname, "test.html"));
+    }
+});
+
+// Start server
+app.listen(3000, () => {
+    console.log(
+        "Server is running on http://localhost:3000");
+});
